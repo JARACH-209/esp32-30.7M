@@ -1,9 +1,26 @@
-# record42
+# Running a 30.7M parameter LLM on a microcontroller, densely
 
-### A 30.72M parameter LLM running dense on an $8 microcontroller.
+<p align="center">
+  <a href="https://github.com/JARACH-209">GitHub</a>
+  <!-- Add your socials here in the same pattern, they belong above the fold:
+  &nbsp;&middot;&nbsp; <a href="https://x.com/YOURHANDLE">X</a>
+  &nbsp;&middot;&nbsp; <a href="https://linkedin.com/in/YOURHANDLE">LinkedIn</a>
+  -->
+</p>
 
-**Every stored parameter is read from memory and multiplied on every single
-token. No lookup tables, no cloud, no SD card, no tricks.**
+![record42 booting and writing a story on an ESP32-S3](media/boot.svg)
+
+<sub>Real serial capture from the device, replayed. Hardware video below.</sub>
+
+<!-- HARDWARE VIDEO GOES HERE, and it should replace the SVG above once shot.
+     One unbroken take: unplug, replug, banner showing fp=8af5c5fe and 30.72M,
+     story streaming to the OLED. Save as media/record42.gif and uncomment:
+
+![record42 running on hardware](media/record42.gif)
+-->
+
+**Every one of those 30.72M parameters is read from memory and multiplied on
+every single token. No lookup tables, no cloud, no SD card.**
 
 ![params](https://img.shields.io/badge/params-30.72M_dense-1f6feb)
 ![chip](https://img.shields.io/badge/chip-ESP32--S3_N16R8-e05d44)
@@ -11,16 +28,6 @@ token. No lookup tables, no cloud, no SD card, no tricks.**
 ![gate](https://img.shields.io/badge/host_gate-92.0%25_top--1-2ea043)
 ![fingerprint](https://img.shields.io/badge/fp-8af5c5fe-8957e5)
 ![license](https://img.shields.io/badge/license-MIT-3fb950)
-
-<!-- HERO VIDEO GOES HERE.
-     Drop the unbroken take (unplug, replug, banner showing fp=8af5c5fe and
-     30.72M, story streaming to the OLED) at media/record42.gif and uncomment:
-
-![record42 booting and writing a story](media/record42.gif)
-
-     GitHub autoplays GIFs inline. An .mp4 dragged into the README on the web
-     editor also works and keeps audio. Until one of these exists, the boot log
-     below is the hero. -->
 
 This is karpathy's [stories42M](https://huggingface.co/karpathy/tinyllamas),
 vocabulary-trimmed until it fits a 16MB ESP32-S3, quantized to 4 bits, and
@@ -56,6 +63,8 @@ about 450 bytes of it per token. When it hit Hacker News, the top question was
 whether lookup-table parameters should count.
 
 record42 is the other side of that trade.
+
+![Every cell of record42's parameter budget does arithmetic on every token; the previous record multiplies about 13 percent of its own](media/dense-vs-lut.svg)
 
 | | **record42** | slvDev PLE (previous record) |
 |---|---|---|
@@ -125,7 +134,10 @@ The trust chain behind that verdict:
    weights cannot disagree silently.
 
 `keep_ids.txt` is committed, so step 3 of the build reproduces this exact pack
-and this exact fingerprint on your machine.
+and this exact fingerprint on your machine. That claim is tested, not asserted:
+rebuilding from the committed keep-list on a clean checkout produces
+`fp=8af5c5fe`, `bytes=16101008`, byte-identical to the pack that is running on
+the board.
 
 ## What was trimmed, exactly
 
