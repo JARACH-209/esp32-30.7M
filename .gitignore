@@ -1,0 +1,19 @@
+# model artifacts: downloaded or generated, never committed
+stories42M.bin
+tokenizer.bin
+record42.bin
+*.pack
+
+# host tool binaries
+gen
+verify
+
+# regenerated into firmware/ by flash_record.sh on every run
+firmware/generated/
+firmware/runq.c
+firmware/runq.h
+
+# scratch
+_to_delete/
+*.o
+.DS_Store

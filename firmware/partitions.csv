@@ -1,0 +1,6 @@
+# Record-attempt layout: the app squeezed to 512KB so the model partition can
+# hold a 15.4MB pack. 0x90000 + 0xF6F000 = 0xFFF000, leaving one 4KB sector.
+# Name,   Type, SubType, Offset,   Size,     Flags
+nvs,      data, nvs,     0x9000,   0x5000,
+factory,  app,  factory, 0x10000,  0x80000,
+model,    data, 0x40,    0x90000,  0xF6F000,
